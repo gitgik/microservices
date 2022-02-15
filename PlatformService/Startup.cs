@@ -34,6 +34,8 @@ namespace PlatformService
         {
             services.AddDbContext<AppDbContext>(opt =>
                 opt.UseInMemoryDatabase("InMem"));
+
+            services.AddScoped<IPlatformRepo, PlatformRepo>();
             services.AddOptions();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -52,27 +54,26 @@ namespace PlatformService
             ILoggerFactory loggerFactory,
             IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-            }
-            else
-            {
-                app.UseHsts();
-            }
-
-            app.UseHttpsRedirection();
-            app.UseRouting();
-            app.UseCors("AllowAllOrigins");
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-
+        if (env.IsDevelopment())
+        {
+            app.UseDeveloperExceptionPage();
             app.UseSwagger();
+        }
+        else
+        {
+            app.UseHsts();
+        }
+
+        app.UseHttpsRedirection();
+        app.UseRouting();
+        app.UseCors("AllowAllOrigins");
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
+
+        app.UseSwagger();
         }
     }
 }
-
