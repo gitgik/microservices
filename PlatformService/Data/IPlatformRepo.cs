@@ -8,7 +8,7 @@ namespace PlatformService.Data
 
         /// <summary>Get all platforms</summmary>
         IEnumerable<Platform> GetAllPlatforms();
-        Platform GetAllPlatformsById(int id);
+        Platform GetPlatformById(int id);
 
         void CreatePlatform(Platform platform);
 
