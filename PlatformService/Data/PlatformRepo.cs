@@ -2,35 +2,35 @@ using PlatformService.Models;
 
 namespace PlatformService.Data
 {
-  public class PlatformRepo : IPlatformRepo
-  {
-    private readonly AppDbContext _context;
-
-    public PlatformRepo(AppDbContext context)
+    public class PlatformRepo : IPlatformRepo
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public void CreatePlatform(Platform platform)
-    {
-        _ = platform ?? throw new ArgumentNullException(nameof(platform));
+        public PlatformRepo(AppDbContext context)
+        {
+            _context = context;
+        }
 
-        _context.Platforms.Add(platform);
-    }
+        public void CreatePlatform(Platform platform)
+        {
+            _ = platform ?? throw new ArgumentNullException(nameof(platform));
 
-    public IEnumerable<Platform> GetAllPlatforms()
-    {
-        return _context.Platforms.ToList();
-    }
+            _context.Platforms.Add(platform);
+        }
 
-    public Platform GetAllPlatformsById(int id)
-    {
-        return _context.Platforms.FirstOrDefault(p => p.Id == id);
-    }
+        public IEnumerable<Platform> GetAllPlatforms()
+        {
+            return _context.Platforms.ToList();
+        }
 
-    public bool SaveChanges()
-    {
-        return (_context.SaveChanges() >= 0);
+        public Platform GetAllPlatformsById(int id)
+        {
+            return _context.Platforms.FirstOrDefault(p => p.Id == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
     }
-  }
 }
