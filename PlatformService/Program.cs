@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
     
 builder.Services.AddScoped<IPlatformRepo, PlatformRepo>();
 
-builder.Services.AddHttpClient<ICommandDataClient, HttpCommandDataClient>();
+builder.Services.AddHttpClient<ICommandServiceHttpClient, CommandServiceHttpClient>();
 
 builder.Services.AddControllers();
 
@@ -24,6 +24,8 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "PlatformService", Version = "v1" });
 });
+
+Console.WriteLine($"--> Command Service Endpoint: {builder.Configuration["CommandService"]}");
 
 var app = builder.Build();
 

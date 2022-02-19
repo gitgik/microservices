@@ -4,7 +4,7 @@ using PlatformService.Dtos;
 
 namespace PlatformService.SyncDataServices.Http;
 
-public class CommandServiceHttpClient : ICommandDataClient
+public class CommandServiceHttpClient : ICommandServiceHttpClient
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
@@ -15,7 +15,7 @@ public class CommandServiceHttpClient : ICommandDataClient
         _configuration = configuration;
     }
 
-    public async Task SendPlatformToCommandService(PlatformReadDto platformReadDto)
+    public async Task SendPlatform(PlatformReadDto platformReadDto)
     {
         var httpContent = new StringContent(
             JsonSerializer.Serialize(platformReadDto),
@@ -34,5 +34,4 @@ public class CommandServiceHttpClient : ICommandDataClient
             Console.WriteLine("Sync to command service failed");
         }
     }
-
 }

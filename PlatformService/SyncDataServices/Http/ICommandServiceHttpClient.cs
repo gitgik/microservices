@@ -1,7 +1,8 @@
 using PlatformService.Dtos;
 
 namespace PlatformService.SyncDataServices.Http;
-public interface ICommandDataClient
+public interface ICommandServiceHttpClient
 {
-    Task SendPlatformToCommandService(PlatformReadDto platformServiceDto);
+    /// <summary>Sends platform to command service</summary>
+    Task SendPlatform(PlatformReadDto platformServiceDto);
 }
