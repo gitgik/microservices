@@ -4,18 +4,18 @@ using PlatformService.Dtos;
 
 namespace PlatformService.SyncDataServices.Http;
 
-public class HttpCommandDataClient : ICommandDataClient
+public class CommandServiceHttpClient : ICommandDataClient
 {
     private readonly HttpClient _httpClient;
     private readonly IConfiguration _configuration;
 
-    public HttpCommandDataClient(HttpClient httpClient, IConfiguration configuration)
+    public CommandServiceHttpClient(HttpClient httpClient, IConfiguration configuration)
     {
         _httpClient = httpClient;
         _configuration = configuration;
     }
 
-    public async Task SendPlatformToCommand(PlatformReadDto platformReadDto)
+    public async Task SendPlatformToCommandService(PlatformReadDto platformReadDto)
     {
         var httpContent = new StringContent(
             JsonSerializer.Serialize(platformReadDto),
@@ -23,7 +23,7 @@ public class HttpCommandDataClient : ICommandDataClient
             "application/json"
         );
 
-        var response = await _httpClient.PostAsync("http://localhost:6000/api/c/platforms", httpContent);
+        var response = await _httpClient.PostAsync($"{_configuration["CommandService"]}", httpContent);
 
         if (response.IsSuccessStatusCode)
         {
