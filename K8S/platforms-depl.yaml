@@ -15,4 +15,18 @@ spec:
       containers:
         - name: platformservice
           image: jeegik/platformservice:latest
+---
+apiVersion: v1
+kind: service
+metadata:
+  name: platforms-clusterip-service
+spec:
+  type: ClusterIP
+  selector:
+    app: platformservice
+  ports:
+  - name: platformservice
+    protocol: TCP
+    targetPort: 80
+    
 
